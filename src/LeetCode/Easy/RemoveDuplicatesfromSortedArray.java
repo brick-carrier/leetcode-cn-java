@@ -42,38 +42,26 @@ package LeetCode.Easy;
 public class RemoveDuplicatesfromSortedArray {
 
     public static void main(String[] args) {
-            int[] arr={0,0,1,1,1,2,2,3,3,4};
-        System.out.println(removeDuplicatesB(arr));
+            int[] arr={1,1,2,3,3,3,3};
+        System.out.println(removeDuplicates(arr));
     }
 
-    //思路1
     public static int removeDuplicates(int[] nums) {
-        if (nums.length==0){
-            return 0;
-        }
-        int temp=0;
-        for (int i=0;i<nums.length;i++){
-            if (i==0){
-               temp=1;
-            }else{
-                if(nums[i]!=nums[i-1]){
-                    temp++;
-                }
-            }
-
-        }
-        return temp;
-    }
-    public static int removeDuplicatesB(int[] nums) {
         int temp=nums.length;
         if (temp<=1){
             return temp;
         }
+        int tail=1;
         for (int i=1;i<nums.length;i++){
-            if (nums[i]==nums[i-1]){
-                temp--;
+            if (nums[i]!=nums[i-1]){
+                nums[tail++]=nums[i];
             }
         }
-        return temp;
+        return tail;
+    }
+
+    public static int removeDuplicatesB(int[] nums) {
+
+       return 0;
     }
 }
