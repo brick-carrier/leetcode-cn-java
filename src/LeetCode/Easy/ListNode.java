@@ -1,4 +1,4 @@
-package LeetCode.Easy.MergeTwoSortedLists;
+package LeetCode.Easy;
 
 public class ListNode {
 

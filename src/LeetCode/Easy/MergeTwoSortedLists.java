@@ -1,8 +1,6 @@
-package LeetCode.Easy.MergeTwoSortedLists;
+package LeetCode.Easy;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import LeetCode.Easy.ListNode;
 
 /**
  * 21、Merge Two Sorted Lists
@@ -22,7 +20,7 @@ public class MergeTwoSortedLists {
 
     }
 
-    public static ListNode mergeTwoSortedLists(ListNode l1,ListNode l2){
+    public static ListNode mergeTwoSortedLists(ListNode l1, ListNode l2){
         if (l1==null)return l2;
         if (l2==null)return l1;
         if (l1.val<l2.val){
