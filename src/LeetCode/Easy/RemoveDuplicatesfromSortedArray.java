@@ -42,34 +42,38 @@ package LeetCode.Easy;
 public class RemoveDuplicatesfromSortedArray {
 
     public static void main(String[] args) {
-        ListNode head=new ListNode(1);
-        ListNode t1=new ListNode(2);
-        ListNode t2=new ListNode(2);
-        ListNode t3=new ListNode(3);
-        ListNode t4=new ListNode(4);
-        ListNode t5=new ListNode(4);
-        head.next=t1;
-        t1.next=t2;
-        t2.next=t3;
-        t3.next=t4;
-        t4.next=t5;
-        ListNode t8=deleteDuplicates(head);
+            int[] arr={0,0,1,1,1,2,2,3,3,4};
+        System.out.println(removeDuplicatesB(arr));
     }
 
-    public static ListNode deleteDuplicates(ListNode head){
-
-        if (head.next==null){
-            return head;
+    //思路1
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length==0){
+            return 0;
         }
-        deleteDuplicates(head.next);
-        if (head.next.val==head.val){
-            if (head.next.next!=null) {
-                head.next = head.next.next;
+        int temp=0;
+        for (int i=0;i<nums.length;i++){
+            if (i==0){
+               temp=1;
             }else{
-                head.next=null;
-                return head;
+                if(nums[i]!=nums[i-1]){
+                    temp++;
+                }
+            }
+
+        }
+        return temp;
+    }
+    public static int removeDuplicatesB(int[] nums) {
+        int temp=nums.length;
+        if (temp<=1){
+            return temp;
+        }
+        for (int i=1;i<nums.length;i++){
+            if (nums[i]==nums[i-1]){
+                temp--;
             }
         }
-        return head;
+        return temp;
     }
 }
