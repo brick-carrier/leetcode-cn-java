@@ -1,7 +1,10 @@
 package LeetCode.Easy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Roman to Integer
+ * 13、Roman to Integer
  Description
  Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
@@ -48,11 +51,96 @@ package LeetCode.Easy;
  */
 public class RomantoInteger {
     public static void main(String[] args) {
+        System.out.println(romanToIntC("MMMXIII"));
 
     }
 
-    public static int transRomantoInteger(String romanNum){
+    public static int romanToInt(String s){
+        //I1, V5, X10, L50, C100, D500 and M1000
+        //IV4,IX9,XL40,XC90,CD400,CM900
+        char[] c=s.toCharArray();
+        int sum=0;
+        if (s.indexOf("IV")!=-1)sum-=2;
+        if (s.indexOf("IX")!=-1)sum-=2;
+        if (s.indexOf("XL")!=-1)sum-=20;
+        if (s.indexOf("XC")!=-1)sum-=20;
+        if (s.indexOf("CD")!=-1)sum-=200;
+        if (s.indexOf("CM")!=-1)sum-=200;
+        for (int i=0;i<s.length();i++){
+            if(c[i]=='I')sum+=1;
+            if(c[i]=='V')sum+=5;
+            if(c[i]=='X')sum+=10;
+            if(c[i]=='L')sum+=50;
+            if(c[i]=='C')sum+=100;
+            if(c[i]=='D')sum+=500;
+            if(c[i]=='M')sum+=1000;
+        }
 
-        return 0;
+        return sum;
+
+    }
+
+    public static int romanToIntB(String s) {
+        //I1, V5, X10, L50, C100, D500 and M1000
+        //IV4,IX9,XL40,XC90,CD400,CM900
+        if (s.trim().equals(""))return 0;
+        Map<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+        int len=s.length();
+        int sum=map.get(s.charAt(len-1));
+        for (int i=len-2;i>=0;--i){
+            if (map.get(s.charAt(i))<map.get(s.charAt(i+1))){
+                sum-=map.get(s.charAt(i));
+            }else{
+                sum+=map.get(s.charAt(i));
+            }
+        }
+        return  sum;
+    }
+
+    public static int romanToIntC(String s) {
+        //I1, V5, X10, L50, C100, D500 and M1000
+        //IV4,IX9,XL40,XC90,CD400,CM900
+        int[] nums=new int[s.length()];
+        for (int i=0;i<s.length();i++) {
+            switch (s.charAt(i)) {
+                case 'M':
+                    nums[i] = 1000;
+                    break;
+                case 'D':
+                    nums[i] = 500;
+                    break;
+                case 'C':
+                    nums[i] = 100;
+                    break;
+                case 'L':
+                    nums[i] = 50;
+                    break;
+                case 'X':
+                    nums[i] = 10;
+                    break;
+                case 'V':
+                    nums[i] = 5;
+                    break;
+                case 'I':
+                    nums[i] = 1;
+                    break;
+            }
+        }
+        int sum = 0;
+        for (int j = 0; j < nums.length-1;j++) {
+                if (nums[j] < nums[j + 1]) {
+                    sum -= nums[j];
+                } else {
+                    sum += nums[j];
+                }
+        }
+        return  sum+nums[nums.length-1];
     }
 }
